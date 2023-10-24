@@ -1,0 +1,51 @@
+(defcfg
+  input (iokit-name "Apple Internal Keyboard / Trackpad")
+  output (kext)
+  fallthrough true
+)
+
+(defsrc
+        f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+        q     w     e     r     t     y     u     i     o     p
+  caps  a     s     d     f     g     h     j     k     l     ;
+        z     x     c     v     b     n     m     
+  fn lctrl
+)
+
+(defalias
+  ;; Home row modifiers
+  sfta (tap-hold-next-release 200 a lsft)
+  ctlr (tap-hold-next-release 200 r lctl)
+  alts (tap-hold-next-release 200 s lalt)
+  mett (tap-hold-next-release 200 t lmet)
+  metn (tap-hold-next-release 200 n rmet)
+  alte (tap-hold-next-release 200 e ralt)
+  ctli (tap-hold-next-release 200 i rctl)
+  sfto (tap-hold-next-release 200 o rsft)
+
+  ;; Toggle fn layer while still emitting the fn keypress
+  fn (around (layer-toggle function) fn)
+
+  ;; TODO DnD key
+)
+
+(deflayer colemak-dhm
+        brdn  brup  mctl  spot  dict  _     prev  pp    next  mute  vold  volu
+        q     w     f     p     b     j     l     u     y     ;
+  lctrl @sfta @ctlr @alts @mett g     m     @metn @alte @ctli @sfto
+        z     x     c     d     v     k     h
+  @fn caps
+)
+
+(deflayer function
+        f1    f2    f3    f4    f5    f6    f7    f8    f9    f10   f11   f12
+        _     _     _     _     _     _     _     _     _     _
+  _     _     _     _     _     _     _     _     _     _     _
+        _     _     _     _     _     _     _
+  -   -
+)
+
+#| References
+[kmonad template](https://github.com/kmonad/kmonad/blob/master/keymap/template/apple.kbd)
+[A guide to home row mods](https://precondition.github.io/home-row-mods#getting-started-with-home-row-mods-on-kmonad)
+|#

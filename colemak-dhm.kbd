@@ -1,0 +1,17 @@
+(defcfg
+  input (iokit-name "Apple Internal Keyboard / Trackpad")
+  output (kext)
+  fallthrough true
+)
+
+(defsrc
+  q w e r t y u i o p
+  a s d f g h j k l ;
+  z x c v b n m
+)
+
+(deflayer colemak-dhm
+  q w f p b j l u y ;
+  a r s t g m n e i o
+  z x c d v k h
+)
